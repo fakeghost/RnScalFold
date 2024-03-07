@@ -2,16 +2,27 @@ package com.rnscaffold;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
+
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.rnscaffold.rnbridge.AppPackage;
+import com.rnscaffold.tools.DSUpdateTool;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+
+    private static volatile MainApplication instance;
+
+    public static MainApplication getInstance() {
+        return instance;
+    }
 
   private final ReactNativeHost mReactNativeHost =
       new ReactNativeHost(this) {
@@ -22,8 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-          @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
+          packages.add(new AppPackage());
+
+
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
           return packages;
@@ -43,6 +56,9 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    instance = this;
+    new DSUpdateTool().getPackageInfo();
+      Log.d("测试", "看看这里");
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
   }
