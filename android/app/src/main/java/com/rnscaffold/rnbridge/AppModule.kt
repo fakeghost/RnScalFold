@@ -1,7 +1,9 @@
 package com.rnscaffold.rnbridge
 
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
+import android.content.Intent
+import android.net.Uri
+import com.facebook.react.bridge.*
+import com.rnscaffold.MainApplication
 
 class AppModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaModule() {
     private var reactContextIn: ReactApplicationContext = reactContext
@@ -20,5 +22,17 @@ class AppModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaMod
         map["AndroidPackageName"] = packageName
 
         return  map
+    }
+
+    @ReactMethod
+    fun jumpToPhonePage(obj: ReadableMap, promise: Promise) {
+        val passObj = Arguments.createMap()
+        passObj.putString("message", "200");
+        val intent = Intent()
+        intent.setAction(Intent.ACTION_DIAL)
+        intent.setData(Uri.parse("tel:" + obj.getString("phone")))
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        MainApplication.getInstance().startActivity(intent);
+        promise.resolve(passObj);
     }
 }

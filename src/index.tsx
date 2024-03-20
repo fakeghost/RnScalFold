@@ -14,7 +14,12 @@ const App = () => {
             <View style={styles.container}>
                 <Pressable
                     onPress={() => {
-                        console.log(APPUtils?.AndroidPackageName)
+                        // console.log(APPUtils?.AndroidPackageName)
+                        APPUtils?.jumpToPhonePage({
+                            phone: '13387561236'
+                        }).then((message: any) => {
+                            console.log(message, '----message---')
+                        })
                     }}>
                     <Text>do something......</Text>
                 </Pressable>

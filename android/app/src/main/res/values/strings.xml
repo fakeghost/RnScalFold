@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RnScafFold</string>
+    <string name="this_is_text">This is Text</string>
+    <string name="button">Button</string>
+    <string name="写点啥">写点啥</string>
 </resources>

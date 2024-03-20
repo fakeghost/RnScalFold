@@ -57,10 +57,12 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     instance = this;
-    new DSUpdateTool().getPackageInfo();
+//    new DSUpdateTool().getPackageInfo();
       Log.d("测试", "看看这里");
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+
+
   }
 
   /**

@@ -8,7 +8,7 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onResume() {
     super.onResume();
-    new DSUpdateTool().getPackageInfo();
+//    new DSUpdateTool().getPackageInfo();
   }
 
   /**
